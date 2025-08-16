@@ -44,13 +44,13 @@ export interface Verification {
      * @type {string}
      * @memberof Verification
      */
-    createdAt: string;
+    created_at: string;
     /**
      * When the user will stop getting reminders
      * @type {string}
      * @memberof Verification
      */
-    expiresAt: string;
+    expires_at: string;
     /**
      * The originally supplied email address
      * @type {string}
@@ -62,19 +62,19 @@ export interface Verification {
      * @type {string}
      * @memberof Verification
      */
-    redirectUrl: string | null;
+    redirect_url: string | null;
     /**
      * The verification flow it belongs to
      * @type {string}
      * @memberof Verification
      */
-    workflowId: string;
+    workflow_id: string;
     /**
      * An identifier from your own systems, to avoid needing to store Vouchsafe's own ID. Provided at request time.
      * @type {string}
      * @memberof Verification
      */
-    externalId: string | null;
+    external_id: string | null;
 }
 
 
@@ -85,12 +85,12 @@ export interface Verification {
 export function instanceOfVerification(value: object): value is Verification {
     if (!('id' in value) || value['id'] === undefined) return false;
     if (!('status' in value) || value['status'] === undefined) return false;
-    if (!('createdAt' in value) || value['createdAt'] === undefined) return false;
-    if (!('expiresAt' in value) || value['expiresAt'] === undefined) return false;
+    if (!('created_at' in value) || value['created_at'] === undefined) return false;
+    if (!('expires_at' in value) || value['expires_at'] === undefined) return false;
     if (!('email' in value) || value['email'] === undefined) return false;
-    if (!('redirectUrl' in value) || value['redirectUrl'] === undefined) return false;
-    if (!('workflowId' in value) || value['workflowId'] === undefined) return false;
-    if (!('externalId' in value) || value['externalId'] === undefined) return false;
+    if (!('redirect_url' in value) || value['redirect_url'] === undefined) return false;
+    if (!('workflow_id' in value) || value['workflow_id'] === undefined) return false;
+    if (!('external_id' in value) || value['external_id'] === undefined) return false;
     return true;
 }
 
@@ -106,12 +106,12 @@ export function VerificationFromJSONTyped(json: any, ignoreDiscriminator: boolea
         
         'id': json['id'],
         'status': StatusFromJSON(json['status']),
-        'createdAt': json['created_at'],
-        'expiresAt': json['expires_at'],
+        'created_at': json['created_at'],
+        'expires_at': json['expires_at'],
         'email': json['email'],
-        'redirectUrl': json['redirect_url'],
-        'workflowId': json['workflow_id'],
-        'externalId': json['external_id'],
+        'redirect_url': json['redirect_url'],
+        'workflow_id': json['workflow_id'],
+        'external_id': json['external_id'],
     };
 }
 
@@ -128,12 +128,12 @@ export function VerificationToJSONTyped(value?: Verification | null, ignoreDiscr
         
         'id': value['id'],
         'status': StatusToJSON(value['status']),
-        'created_at': value['createdAt'],
-        'expires_at': value['expiresAt'],
+        'created_at': value['created_at'],
+        'expires_at': value['expires_at'],
         'email': value['email'],
-        'redirect_url': value['redirectUrl'],
-        'workflow_id': value['workflowId'],
-        'external_id': value['externalId'],
+        'redirect_url': value['redirect_url'],
+        'workflow_id': value['workflow_id'],
+        'external_id': value['external_id'],
     };
 }
 

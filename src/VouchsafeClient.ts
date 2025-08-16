@@ -4,14 +4,27 @@ import { VerificationsApi } from "./openapi/apis/VerificationsApi"
 import { SmartLookupsApi } from "./openapi/apis/SmartLookupsApi"
 import {
   AuthenticateRequestBody,
-  AuthenticateResponse,
+  RequestVerificationRequestBody,
+  SmartLookupInput,
   Status,
 } from "./openapi/models"
+// Above are all generated files from openapi-generator
 
 interface VouchsafeClientOptions {
-  clientId: string
-  clientSecret: string
+  client_id: string
+  client_secret: string
   sandbox?: boolean
+}
+
+export class VouchsafeApiError extends Error {
+  constructor(
+    public statusCode: number,
+    public responseBody: unknown,
+    message?: string
+  ) {
+    super(message)
+    this.name = "VouchsafeApiError"
+  }
 }
 
 export class VouchsafeClient {
@@ -38,53 +51,92 @@ export class VouchsafeClient {
     this.smartLookupsApi = new SmartLookupsApi(this.config)
   }
 
+  /**
+   * PRIVATE METHODS
+   *
+   * To simplify interacting with the API
+   */
+
+  // Handle token expiration and pass into every request
   private getAccessToken = async (): Promise<string> => {
     const now = new Date()
+    const bufferMs = 5 * 60 * 1000 // 5 minutes
 
-    if (this.token && this.tokenExpiry && now < this.tokenExpiry) {
+    if (
+      this.token &&
+      this.tokenExpiry &&
+      now.getTime() < this.tokenExpiry.getTime() - bufferMs
+    ) {
       return this.token
     }
 
     const authBody: AuthenticateRequestBody = {
-      clientId: this.options.clientId,
-      clientSecret: this.options.clientSecret,
+      client_id: this.options.client_id,
+      client_secret: this.options.client_secret,
     }
 
     const response = await this.authenticationApi.authenticate({
       authenticateRequestBody: authBody,
     })
 
-    this.token = response.accessToken
-    this.tokenExpiry = new Date(response.expiresAt)
+    this.token = response.access_token
+    this.tokenExpiry = new Date(response.expires_at)
 
     return this.token
   }
 
-  // Public API methods
+  // Wrap raw fetch response errors and provide something cleaner
+  private withErrorHandling = async <T>(promise: Promise<T>): Promise<T> => {
+    try {
+      return await promise
+    } catch (err: any) {
+      if (err.name === "ResponseError" && err.response instanceof Response) {
+        const body = await err.response.json().catch(() => ({}))
+        const message = body?.message ?? err.response.statusText
+        throw new VouchsafeApiError(err.response.status, body, message)
+      }
 
-  async getVerification(id: string) {
-    return this.verificationsApi.getVerification({ id })
+      throw err
+    }
   }
 
-  async listVerifications(status?: Status) {
-    return this.verificationsApi.listVerifications({
-      status,
-    })
+  /**
+   * PUBLIC METHODS
+   *
+   * One for every endpoint we expose
+   */
+
+  async getVerification({ id }: { id: string }) {
+    return this.withErrorHandling(this.verificationsApi.getVerification({ id }))
   }
 
-  async requestVerification(
-    params: Parameters<VerificationsApi["requestVerification"]>[0]
-  ) {
-    return this.verificationsApi.requestVerification(params)
+  async listVerifications({ status }: { status?: Status } = {}) {
+    return this.withErrorHandling(
+      this.verificationsApi.listVerifications({ status })
+    )
   }
 
-  async performSmartLookup(
-    params: Parameters<SmartLookupsApi["performSmartLookup"]>[0]
-  ) {
-    return this.smartLookupsApi.performSmartLookup(params)
+  async requestVerification(input: RequestVerificationRequestBody) {
+    return this.withErrorHandling(
+      this.verificationsApi.requestVerification({
+        requestVerificationRequestBody: input,
+      })
+    )
   }
 
-  async searchPostcode(postcode: string) {
-    return this.smartLookupsApi.searchPostcode({ postcode })
+  async performSmartLookup(input: SmartLookupInput) {
+    return this.withErrorHandling(
+      this.smartLookupsApi.performSmartLookup({
+        smartLookupInput: input,
+      })
+    )
   }
+
+  async searchPostcode({ postcode }: { postcode: string }) {
+    return this.withErrorHandling(
+      this.smartLookupsApi.searchPostcode({ postcode })
+    )
+  }
+
+  // Add more endpoints here...
 }

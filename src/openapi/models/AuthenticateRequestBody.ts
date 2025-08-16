@@ -24,21 +24,21 @@ export interface AuthenticateRequestBody {
      * @type {string}
      * @memberof AuthenticateRequestBody
      */
-    clientId: string;
+    client_id: string;
     /**
      * 
      * @type {string}
      * @memberof AuthenticateRequestBody
      */
-    clientSecret: string;
+    client_secret: string;
 }
 
 /**
  * Check if a given object implements the AuthenticateRequestBody interface.
  */
 export function instanceOfAuthenticateRequestBody(value: object): value is AuthenticateRequestBody {
-    if (!('clientId' in value) || value['clientId'] === undefined) return false;
-    if (!('clientSecret' in value) || value['clientSecret'] === undefined) return false;
+    if (!('client_id' in value) || value['client_id'] === undefined) return false;
+    if (!('client_secret' in value) || value['client_secret'] === undefined) return false;
     return true;
 }
 
@@ -52,8 +52,8 @@ export function AuthenticateRequestBodyFromJSONTyped(json: any, ignoreDiscrimina
     }
     return {
         
-        'clientId': json['client_id'],
-        'clientSecret': json['client_secret'],
+        'client_id': json['client_id'],
+        'client_secret': json['client_secret'],
     };
 }
 
@@ -68,8 +68,8 @@ export function AuthenticateRequestBodyToJSONTyped(value?: AuthenticateRequestBo
 
     return {
         
-        'client_id': value['clientId'],
-        'client_secret': value['clientSecret'],
+        'client_id': value['client_id'],
+        'client_secret': value['client_secret'],
     };
 }
 

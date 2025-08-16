@@ -36,7 +36,7 @@ export interface RequestVerificationResponse {
      * @type {string}
      * @memberof RequestVerificationResponse
      */
-    expiresAt: string;
+    expires_at: string;
 }
 
 /**
@@ -45,7 +45,7 @@ export interface RequestVerificationResponse {
 export function instanceOfRequestVerificationResponse(value: object): value is RequestVerificationResponse {
     if (!('url' in value) || value['url'] === undefined) return false;
     if (!('id' in value) || value['id'] === undefined) return false;
-    if (!('expiresAt' in value) || value['expiresAt'] === undefined) return false;
+    if (!('expires_at' in value) || value['expires_at'] === undefined) return false;
     return true;
 }
 
@@ -61,7 +61,7 @@ export function RequestVerificationResponseFromJSONTyped(json: any, ignoreDiscri
         
         'url': json['url'],
         'id': json['id'],
-        'expiresAt': json['expires_at'],
+        'expires_at': json['expires_at'],
     };
 }
 
@@ -78,7 +78,7 @@ export function RequestVerificationResponseToJSONTyped(value?: RequestVerificati
         
         'url': value['url'],
         'id': value['id'],
-        'expires_at': value['expiresAt'],
+        'expires_at': value['expires_at'],
     };
 }
 

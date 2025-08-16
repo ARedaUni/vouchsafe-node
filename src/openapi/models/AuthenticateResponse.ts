@@ -24,21 +24,21 @@ export interface AuthenticateResponse {
      * @type {string}
      * @memberof AuthenticateResponse
      */
-    accessToken: string;
+    access_token: string;
     /**
      * 
      * @type {string}
      * @memberof AuthenticateResponse
      */
-    expiresAt: string;
+    expires_at: string;
 }
 
 /**
  * Check if a given object implements the AuthenticateResponse interface.
  */
 export function instanceOfAuthenticateResponse(value: object): value is AuthenticateResponse {
-    if (!('accessToken' in value) || value['accessToken'] === undefined) return false;
-    if (!('expiresAt' in value) || value['expiresAt'] === undefined) return false;
+    if (!('access_token' in value) || value['access_token'] === undefined) return false;
+    if (!('expires_at' in value) || value['expires_at'] === undefined) return false;
     return true;
 }
 
@@ -52,8 +52,8 @@ export function AuthenticateResponseFromJSONTyped(json: any, ignoreDiscriminator
     }
     return {
         
-        'accessToken': json['access_token'],
-        'expiresAt': json['expires_at'],
+        'access_token': json['access_token'],
+        'expires_at': json['expires_at'],
     };
 }
 
@@ -68,8 +68,8 @@ export function AuthenticateResponseToJSONTyped(value?: AuthenticateResponse | n
 
     return {
         
-        'access_token': value['accessToken'],
-        'expires_at': value['expiresAt'],
+        'access_token': value['access_token'],
+        'expires_at': value['expires_at'],
     };
 }
 

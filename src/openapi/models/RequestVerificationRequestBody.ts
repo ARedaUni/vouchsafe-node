@@ -30,19 +30,19 @@ export interface RequestVerificationRequestBody {
      * @type {string}
      * @memberof RequestVerificationRequestBody
      */
-    firstName?: string;
+    first_name?: string;
     /**
      * The user's last name, if you have it
      * @type {string}
      * @memberof RequestVerificationRequestBody
      */
-    lastName?: string;
+    last_name?: string;
     /**
      * The user's street address, if you have it
      * @type {string}
      * @memberof RequestVerificationRequestBody
      */
-    streetAddress?: string;
+    street_address?: string;
     /**
      * The user's postcode, if you have it
      * @type {string}
@@ -54,7 +54,7 @@ export interface RequestVerificationRequestBody {
      * @type {string}
      * @memberof RequestVerificationRequestBody
      */
-    dateOfBirth?: string;
+    date_of_birth?: string;
     /**
      * Which verification flow to use.
      * 
@@ -66,13 +66,13 @@ export interface RequestVerificationRequestBody {
      * @type {string}
      * @memberof RequestVerificationRequestBody
      */
-    workflowId?: string;
+    workflow_id?: string;
     /**
      * An identifier from your own systems, to avoid needing to store Vouchsafe's own ID
      * @type {string}
      * @memberof RequestVerificationRequestBody
      */
-    externalId?: string;
+    external_id?: string;
     /**
      * A generic or unique URL to send the user back to upon success.
      * 
@@ -80,7 +80,7 @@ export interface RequestVerificationRequestBody {
      * @type {string}
      * @memberof RequestVerificationRequestBody
      */
-    redirectUrl?: string;
+    redirect_url?: string;
     /**
      * When will the verification session expire and the user cease getting reminders?
      * 
@@ -88,7 +88,7 @@ export interface RequestVerificationRequestBody {
      * @type {string}
      * @memberof RequestVerificationRequestBody
      */
-    expiresAt?: string;
+    expires_at?: string;
 }
 
 /**
@@ -110,15 +110,15 @@ export function RequestVerificationRequestBodyFromJSONTyped(json: any, ignoreDis
     return {
         
         'email': json['email'],
-        'firstName': json['first_name'] == null ? undefined : json['first_name'],
-        'lastName': json['last_name'] == null ? undefined : json['last_name'],
-        'streetAddress': json['street_address'] == null ? undefined : json['street_address'],
+        'first_name': json['first_name'] == null ? undefined : json['first_name'],
+        'last_name': json['last_name'] == null ? undefined : json['last_name'],
+        'street_address': json['street_address'] == null ? undefined : json['street_address'],
         'postcode': json['postcode'] == null ? undefined : json['postcode'],
-        'dateOfBirth': json['date_of_birth'] == null ? undefined : json['date_of_birth'],
-        'workflowId': json['workflow_id'] == null ? undefined : json['workflow_id'],
-        'externalId': json['external_id'] == null ? undefined : json['external_id'],
-        'redirectUrl': json['redirect_url'] == null ? undefined : json['redirect_url'],
-        'expiresAt': json['expires_at'] == null ? undefined : json['expires_at'],
+        'date_of_birth': json['date_of_birth'] == null ? undefined : json['date_of_birth'],
+        'workflow_id': json['workflow_id'] == null ? undefined : json['workflow_id'],
+        'external_id': json['external_id'] == null ? undefined : json['external_id'],
+        'redirect_url': json['redirect_url'] == null ? undefined : json['redirect_url'],
+        'expires_at': json['expires_at'] == null ? undefined : json['expires_at'],
     };
 }
 
@@ -134,15 +134,15 @@ export function RequestVerificationRequestBodyToJSONTyped(value?: RequestVerific
     return {
         
         'email': value['email'],
-        'first_name': value['firstName'],
-        'last_name': value['lastName'],
-        'street_address': value['streetAddress'],
+        'first_name': value['first_name'],
+        'last_name': value['last_name'],
+        'street_address': value['street_address'],
         'postcode': value['postcode'],
-        'date_of_birth': value['dateOfBirth'],
-        'workflow_id': value['workflowId'],
-        'external_id': value['externalId'],
-        'redirect_url': value['redirectUrl'],
-        'expires_at': value['expiresAt'],
+        'date_of_birth': value['date_of_birth'],
+        'workflow_id': value['workflow_id'],
+        'external_id': value['external_id'],
+        'redirect_url': value['redirect_url'],
+        'expires_at': value['expires_at'],
     };
 }
 

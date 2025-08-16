@@ -32,28 +32,28 @@ export interface RecordAddressVerificationChecksCheckResult {
      * @type {CheckResult}
      * @memberof RecordAddressVerificationChecksCheckResult
      */
-    pOSTCODEEXISTS: CheckResult;
+    POSTCODE_EXISTS: CheckResult;
     /**
      * 
      * @type {CheckResult}
      * @memberof RecordAddressVerificationChecksCheckResult
      */
-    aDDRESSEXISTS: CheckResult;
+    ADDRESS_EXISTS: CheckResult;
     /**
      * 
      * @type {CheckResult}
      * @memberof RecordAddressVerificationChecksCheckResult
      */
-    pERSONLIVESATADDRESS: CheckResult;
+    PERSON_LIVES_AT_ADDRESS: CheckResult;
 }
 
 /**
  * Check if a given object implements the RecordAddressVerificationChecksCheckResult interface.
  */
 export function instanceOfRecordAddressVerificationChecksCheckResult(value: object): value is RecordAddressVerificationChecksCheckResult {
-    if (!('pOSTCODEEXISTS' in value) || value['pOSTCODEEXISTS'] === undefined) return false;
-    if (!('aDDRESSEXISTS' in value) || value['aDDRESSEXISTS'] === undefined) return false;
-    if (!('pERSONLIVESATADDRESS' in value) || value['pERSONLIVESATADDRESS'] === undefined) return false;
+    if (!('POSTCODE_EXISTS' in value) || value['POSTCODE_EXISTS'] === undefined) return false;
+    if (!('ADDRESS_EXISTS' in value) || value['ADDRESS_EXISTS'] === undefined) return false;
+    if (!('PERSON_LIVES_AT_ADDRESS' in value) || value['PERSON_LIVES_AT_ADDRESS'] === undefined) return false;
     return true;
 }
 
@@ -67,9 +67,9 @@ export function RecordAddressVerificationChecksCheckResultFromJSONTyped(json: an
     }
     return {
         
-        'pOSTCODEEXISTS': CheckResultFromJSON(json['POSTCODE_EXISTS']),
-        'aDDRESSEXISTS': CheckResultFromJSON(json['ADDRESS_EXISTS']),
-        'pERSONLIVESATADDRESS': CheckResultFromJSON(json['PERSON_LIVES_AT_ADDRESS']),
+        'POSTCODE_EXISTS': CheckResultFromJSON(json['POSTCODE_EXISTS']),
+        'ADDRESS_EXISTS': CheckResultFromJSON(json['ADDRESS_EXISTS']),
+        'PERSON_LIVES_AT_ADDRESS': CheckResultFromJSON(json['PERSON_LIVES_AT_ADDRESS']),
     };
 }
 
@@ -84,9 +84,9 @@ export function RecordAddressVerificationChecksCheckResultToJSONTyped(value?: Re
 
     return {
         
-        'POSTCODE_EXISTS': CheckResultToJSON(value['pOSTCODEEXISTS']),
-        'ADDRESS_EXISTS': CheckResultToJSON(value['aDDRESSEXISTS']),
-        'PERSON_LIVES_AT_ADDRESS': CheckResultToJSON(value['pERSONLIVESATADDRESS']),
+        'POSTCODE_EXISTS': CheckResultToJSON(value['POSTCODE_EXISTS']),
+        'ADDRESS_EXISTS': CheckResultToJSON(value['ADDRESS_EXISTS']),
+        'PERSON_LIVES_AT_ADDRESS': CheckResultToJSON(value['PERSON_LIVES_AT_ADDRESS']),
     };
 }
 

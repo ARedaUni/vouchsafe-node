@@ -24,7 +24,7 @@ export interface ApiErrorResponse {
      * @type {number}
      * @memberof ApiErrorResponse
      */
-    statusCode: number;
+    status_code: number;
     /**
      * 
      * @type {string}
@@ -36,14 +36,14 @@ export interface ApiErrorResponse {
      * @type {any}
      * @memberof ApiErrorResponse
      */
-    errorDetail?: any | null;
+    error_detail?: any | null;
 }
 
 /**
  * Check if a given object implements the ApiErrorResponse interface.
  */
 export function instanceOfApiErrorResponse(value: object): value is ApiErrorResponse {
-    if (!('statusCode' in value) || value['statusCode'] === undefined) return false;
+    if (!('status_code' in value) || value['status_code'] === undefined) return false;
     if (!('message' in value) || value['message'] === undefined) return false;
     return true;
 }
@@ -58,9 +58,9 @@ export function ApiErrorResponseFromJSONTyped(json: any, ignoreDiscriminator: bo
     }
     return {
         
-        'statusCode': json['status_code'],
+        'status_code': json['status_code'],
         'message': json['message'],
-        'errorDetail': json['error_detail'] == null ? undefined : json['error_detail'],
+        'error_detail': json['error_detail'] == null ? undefined : json['error_detail'],
     };
 }
 
@@ -75,9 +75,9 @@ export function ApiErrorResponseToJSONTyped(value?: ApiErrorResponse | null, ign
 
     return {
         
-        'status_code': value['statusCode'],
+        'status_code': value['status_code'],
         'message': value['message'],
-        'error_detail': value['errorDetail'],
+        'error_detail': value['error_detail'],
     };
 }
 

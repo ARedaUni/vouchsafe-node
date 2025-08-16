@@ -45,7 +45,7 @@ export interface GetSmartLookupResponse {
      * @type {string}
      * @memberof GetSmartLookupResponse
      */
-    teamId: string;
+    team_id: string;
     /**
      * 
      * @type {Array<Model36EnumsBackgroundCheck>}
@@ -57,19 +57,19 @@ export interface GetSmartLookupResponse {
      * @type {string}
      * @memberof GetSmartLookupResponse
      */
-    firstName: string | null;
+    first_name: string | null;
     /**
      * 
      * @type {string}
      * @memberof GetSmartLookupResponse
      */
-    lastName: string | null;
+    last_name: string | null;
     /**
      * 
      * @type {string}
      * @memberof GetSmartLookupResponse
      */
-    firstLineOfAddress: string | null;
+    first_line_of_address: string | null;
     /**
      * 
      * @type {string}
@@ -81,7 +81,7 @@ export interface GetSmartLookupResponse {
      * @type {Report}
      * @memberof GetSmartLookupResponse
      */
-    addressVerificationReport: Report | null;
+    address_verification_report: Report | null;
     /**
      * Extra information to aid debugging. May change without notice.
      * @type {any}
@@ -93,7 +93,7 @@ export interface GetSmartLookupResponse {
      * @type {string}
      * @memberof GetSmartLookupResponse
      */
-    createdAt: string;
+    created_at: string;
 }
 
 /**
@@ -101,15 +101,15 @@ export interface GetSmartLookupResponse {
  */
 export function instanceOfGetSmartLookupResponse(value: object): value is GetSmartLookupResponse {
     if (!('id' in value) || value['id'] === undefined) return false;
-    if (!('teamId' in value) || value['teamId'] === undefined) return false;
+    if (!('team_id' in value) || value['team_id'] === undefined) return false;
     if (!('checks' in value) || value['checks'] === undefined) return false;
-    if (!('firstName' in value) || value['firstName'] === undefined) return false;
-    if (!('lastName' in value) || value['lastName'] === undefined) return false;
-    if (!('firstLineOfAddress' in value) || value['firstLineOfAddress'] === undefined) return false;
+    if (!('first_name' in value) || value['first_name'] === undefined) return false;
+    if (!('last_name' in value) || value['last_name'] === undefined) return false;
+    if (!('first_line_of_address' in value) || value['first_line_of_address'] === undefined) return false;
     if (!('postcode' in value) || value['postcode'] === undefined) return false;
-    if (!('addressVerificationReport' in value) || value['addressVerificationReport'] === undefined) return false;
+    if (!('address_verification_report' in value) || value['address_verification_report'] === undefined) return false;
     if (!('metadata' in value) || value['metadata'] === undefined) return false;
-    if (!('createdAt' in value) || value['createdAt'] === undefined) return false;
+    if (!('created_at' in value) || value['created_at'] === undefined) return false;
     return true;
 }
 
@@ -124,15 +124,15 @@ export function GetSmartLookupResponseFromJSONTyped(json: any, ignoreDiscriminat
     return {
         
         'id': json['id'],
-        'teamId': json['team_id'],
+        'team_id': json['team_id'],
         'checks': ((json['checks'] as Array<any>).map(Model36EnumsBackgroundCheckFromJSON)),
-        'firstName': json['first_name'],
-        'lastName': json['last_name'],
-        'firstLineOfAddress': json['first_line_of_address'],
+        'first_name': json['first_name'],
+        'last_name': json['last_name'],
+        'first_line_of_address': json['first_line_of_address'],
         'postcode': json['postcode'],
-        'addressVerificationReport': ReportFromJSON(json['address_verification_report']),
+        'address_verification_report': ReportFromJSON(json['address_verification_report']),
         'metadata': json['metadata'],
-        'createdAt': json['created_at'],
+        'created_at': json['created_at'],
     };
 }
 
@@ -148,15 +148,15 @@ export function GetSmartLookupResponseToJSONTyped(value?: GetSmartLookupResponse
     return {
         
         'id': value['id'],
-        'team_id': value['teamId'],
+        'team_id': value['team_id'],
         'checks': ((value['checks'] as Array<any>).map(Model36EnumsBackgroundCheckToJSON)),
-        'first_name': value['firstName'],
-        'last_name': value['lastName'],
-        'first_line_of_address': value['firstLineOfAddress'],
+        'first_name': value['first_name'],
+        'last_name': value['last_name'],
+        'first_line_of_address': value['first_line_of_address'],
         'postcode': value['postcode'],
-        'address_verification_report': ReportToJSON(value['addressVerificationReport']),
+        'address_verification_report': ReportToJSON(value['address_verification_report']),
         'metadata': value['metadata'],
-        'created_at': value['createdAt'],
+        'created_at': value['created_at'],
     };
 }
 

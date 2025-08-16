@@ -24,7 +24,7 @@ export interface SmartLookupInput {
      * @type {string}
      * @memberof SmartLookupInput
      */
-    firstLineOfAddress: string;
+    first_line_of_address: string;
     /**
      * 
      * @type {string}
@@ -36,13 +36,13 @@ export interface SmartLookupInput {
      * @type {string}
      * @memberof SmartLookupInput
      */
-    firstName: string;
+    first_name: string;
     /**
      * 
      * @type {string}
      * @memberof SmartLookupInput
      */
-    lastName: string;
+    last_name: string;
     /**
      * Experimental, other checks coming soon
      * @type {Array<string>}
@@ -65,10 +65,10 @@ export type SmartLookupInputChecksEnum = typeof SmartLookupInputChecksEnum[keyof
  * Check if a given object implements the SmartLookupInput interface.
  */
 export function instanceOfSmartLookupInput(value: object): value is SmartLookupInput {
-    if (!('firstLineOfAddress' in value) || value['firstLineOfAddress'] === undefined) return false;
+    if (!('first_line_of_address' in value) || value['first_line_of_address'] === undefined) return false;
     if (!('postcode' in value) || value['postcode'] === undefined) return false;
-    if (!('firstName' in value) || value['firstName'] === undefined) return false;
-    if (!('lastName' in value) || value['lastName'] === undefined) return false;
+    if (!('first_name' in value) || value['first_name'] === undefined) return false;
+    if (!('last_name' in value) || value['last_name'] === undefined) return false;
     if (!('checks' in value) || value['checks'] === undefined) return false;
     return true;
 }
@@ -83,10 +83,10 @@ export function SmartLookupInputFromJSONTyped(json: any, ignoreDiscriminator: bo
     }
     return {
         
-        'firstLineOfAddress': json['first_line_of_address'],
+        'first_line_of_address': json['first_line_of_address'],
         'postcode': json['postcode'],
-        'firstName': json['first_name'],
-        'lastName': json['last_name'],
+        'first_name': json['first_name'],
+        'last_name': json['last_name'],
         'checks': json['checks'],
     };
 }
@@ -102,10 +102,10 @@ export function SmartLookupInputToJSONTyped(value?: SmartLookupInput | null, ign
 
     return {
         
-        'first_line_of_address': value['firstLineOfAddress'],
+        'first_line_of_address': value['first_line_of_address'],
         'postcode': value['postcode'],
-        'first_name': value['firstName'],
-        'last_name': value['lastName'],
+        'first_name': value['first_name'],
+        'last_name': value['last_name'],
         'checks': value['checks'],
     };
 }

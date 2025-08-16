@@ -18,7 +18,7 @@
   "scripts": {
     "build": "tsc -p tsconfig.esm.json && tsc -p tsconfig.cjs.json",
     "clean:sdk": "rm -rf src/openapi",
-    "generate:sdk": "npx openapi-generator-cli generate -i https://app.vouchsafe.id/openapi/swagger.json -g typescript-fetch -o src/openapi --skip-validate-spec",
+    "generate": "npx openapi-generator-cli generate -i https://app.vouchsafe.id/openapi/swagger.json -g typescript-fetch -o src/openapi --skip-validate-spec   --additional-properties=modelPropertyNaming=original",
     "prepare": "npm run build"
   },
   "keywords": [
