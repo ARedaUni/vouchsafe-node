@@ -1,9 +1,23 @@
 {
-  "name": "vouchsafe-client",
-  "version": "0.1.0",
-  "description": "Official Vouchsafe SDK for Node.js and TypeScript",
+  "name": "@vouchsafe/node",
+  "version": "0.1.1",
+  "description": "Official TypeScript and Node.js library for the Vouchsafe identity platform. Use it for easy KYC checks, identity verification, remote right-to-work and more.",
+  "keywords": [
+    "vouchsafe",
+    "identity",
+    "verification",
+    "sdk",
+    "kyc",
+    "api",
+    "node",
+    "typescript"
+  ],
   "author": "Vouchsafe",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vouchsafe/vouchsafe-node"
+  },
   "type": "module",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
@@ -17,20 +31,9 @@
   ],
   "scripts": {
     "build": "tsc -p tsconfig.esm.json && tsc -p tsconfig.cjs.json",
-    "clean:sdk": "rm -rf src/openapi",
     "generate": "npx openapi-generator-cli generate -i https://app.vouchsafe.id/openapi/swagger.json -g typescript-fetch -o src/openapi --skip-validate-spec   --additional-properties=modelPropertyNaming=original",
     "prepare": "npm run build"
   },
-  "keywords": [
-    "vouchsafe",
-    "kyc",
-    "aml",
-    "identity",
-    "verification",
-    "sdk",
-    "typescript",
-    "node"
-  ],
   "devDependencies": {
     "@openapitools/openapi-generator-cli": "^2.22.0",
     "typescript": "^5.9.2"
