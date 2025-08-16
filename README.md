@@ -9,9 +9,9 @@ Node 18 or better.
 ## Installation
 
 ```
-npm install vouchsafe
+npm install @vouchsafe/node
 # or
-yarn add vouchsafe
+yarn add  @vouchsafe/node
 ```
 
 ## Usage
@@ -19,7 +19,7 @@ yarn add vouchsafe
 The SDK needs a client ID and secret, which is available in the [Vouchsafe dashboard](https://app.vouchsafe.id). Replace the values below:
 
 ```ts
-import { VouchsafeClient } from "vouchsafe-client"
+import { VouchsafeClient } from " @vouchsafe/node"
 
 const client = new VouchsafeClient({
   client_id: "YOUR_CLIENT_ID",
