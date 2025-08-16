@@ -1,24 +1,29 @@
 {
   "name": "vouchsafe",
   "version": "0.1.0",
-  "description": "Official TypeScript and Node.js library for the Vouchsafe identity platform. Use it for easy KYC checks, identity verification, remote right-to-work and more.",
   "type": "module",
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js"
+    }
+  },
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/types/index.d.ts",
   "files": [
     "dist"
   ],
-  "sideEffects": false,
   "engines": {
-    "node": ">=16"
+    "node": ">=18"
   },
   "scripts": {
     "openapi:gen": "openapi-ts",
-    "build": "tsc -p tsconfig.json",
+    "build:esm": "tsc -p tsconfig.esm.json",
+    "build:cjs": "tsc -p tsconfig.cjs.json && node -e \"const fs=require('fs');const path=require('path');const dir=path.join('dist','cjs');fs.mkdirSync(dir,{recursive:true});fs.writeFileSync(path.join(dir,'package.json'),JSON.stringify({type:'commonjs'}));\"",
+    "build": "rm -rf dist && npm run build:esm && npm run build:cjs",
     "prepublishOnly": "npm run openapi:gen && npm run build"
-  },
-  "dependencies": {
-    "undici": "^6.19.8"
   },
   "devDependencies": {
     "@hey-api/openapi-ts": "^0.80.0",
