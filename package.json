@@ -1,32 +1,38 @@
 {
-  "name": "vouchsafe",
+  "name": "vouchsafe-client",
   "version": "0.1.0",
+  "description": "Official Vouchsafe SDK for Node.js and TypeScript",
+  "author": "Vouchsafe",
+  "license": "MIT",
   "type": "module",
-  "exports": {
-    ".": {
-      "types": "./dist/types/index.d.ts",
-      "import": "./dist/esm/index.js",
-      "require": "./dist/cjs/index.js"
-    }
-  },
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
-  "types": "./dist/types/index.d.ts",
+  "types": "./dist/esm/index.d.ts",
+  "exports": {
+    "import": "./dist/esm/index.js",
+    "require": "./dist/cjs/index.js"
+  },
   "files": [
     "dist"
   ],
-  "engines": {
-    "node": ">=18"
-  },
   "scripts": {
-    "openapi:gen": "openapi-ts",
-    "build:esm": "tsc -p tsconfig.esm.json",
-    "build:cjs": "tsc -p tsconfig.cjs.json && node -e \"const fs=require('fs');const path=require('path');const dir=path.join('dist','cjs');fs.mkdirSync(dir,{recursive:true});fs.writeFileSync(path.join(dir,'package.json'),JSON.stringify({type:'commonjs'}));\"",
-    "build": "rm -rf dist && npm run build:esm && npm run build:cjs",
-    "prepublishOnly": "npm run openapi:gen && npm run build"
+    "build": "tsc -p tsconfig.esm.json && tsc -p tsconfig.cjs.json",
+    "clean:sdk": "rm -rf src/openapi",
+    "generate": "npx openapi-generator-cli generate -i https://app.vouchsafe.id/openapi/swagger.json -g typescript-fetch -o src/openapi --skip-validate-spec   --additional-properties=modelPropertyNaming=original",
+    "prepare": "npm run build"
   },
+  "keywords": [
+    "vouchsafe",
+    "kyc",
+    "aml",
+    "identity",
+    "verification",
+    "sdk",
+    "typescript",
+    "node"
+  ],
   "devDependencies": {
-    "@hey-api/openapi-ts": "^0.80.0",
-    "typescript": "^5.5.4"
+    "@openapitools/openapi-generator-cli": "^2.22.0",
+    "typescript": "^5.9.2"
   }
 }

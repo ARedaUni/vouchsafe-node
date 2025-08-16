@@ -1,2 +1,5 @@
-export * from "./VouchsafeClient"
-// optionally: export * from './gen' if you want to expose raw ops too
+export {
+  VouchsafeClient,
+  VouchsafeApiError, // let users access error class directly
+} from "./VouchsafeClient"
+export * from "./openapi/models" // let users access types directly
