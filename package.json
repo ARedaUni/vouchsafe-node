@@ -1,1 +1,27 @@
-
+{
+  "name": "vouchsafe",
+  "version": "0.1.0",
+  "description": "Official TypeScript and Node.js library for the Vouchsafe identity platform. Use it for easy KYC checks, identity verification, remote right-to-work and more.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "sideEffects": false,
+  "engines": {
+    "node": ">=16"
+  },
+  "scripts": {
+    "openapi:gen": "openapi-ts",
+    "build": "tsc -p tsconfig.json",
+    "prepublishOnly": "npm run openapi:gen && npm run build"
+  },
+  "dependencies": {
+    "undici": "^6.19.8"
+  },
+  "devDependencies": {
+    "@hey-api/openapi-ts": "^0.80.0",
+    "typescript": "^5.5.4"
+  }
+}
