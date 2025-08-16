@@ -19,7 +19,7 @@ yarn add  @vouchsafe/node
 The SDK needs a client ID and secret, which is available in the [Vouchsafe dashboard](https://app.vouchsafe.id). Replace the values below:
 
 ```ts
-import { VouchsafeClient } from " @vouchsafe/node"
+import { VouchsafeClient } from "@vouchsafe/node"
 
 const client = new VouchsafeClient({
   client_id: "YOUR_CLIENT_ID",
