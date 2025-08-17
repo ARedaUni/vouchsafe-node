@@ -3,8 +3,8 @@ import { AuthenticationApi } from "./openapi/apis/AuthenticationApi"
 import { VerificationsApi } from "./openapi/apis/VerificationsApi"
 import { SmartLookupsApi } from "./openapi/apis/SmartLookupsApi"
 import {
-  AuthenticateRequestBody,
-  RequestVerificationRequestBody,
+  AuthenticateInput,
+  RequestVerificationInput,
   SmartLookupInput,
   Status,
 } from "./openapi/models"
@@ -13,7 +13,6 @@ import {
 interface VouchsafeClientOptions {
   client_id: string
   client_secret: string
-  sandbox?: boolean
 }
 
 export class VouchsafeApiError extends Error {
@@ -37,9 +36,7 @@ export class VouchsafeClient {
   private smartLookupsApi: SmartLookupsApi
 
   constructor(private options: VouchsafeClientOptions) {
-    const basePath = options.sandbox
-      ? "https://app.vouchsafe.id/api/v1/sandbox"
-      : "https://app.vouchsafe.id/api/v1"
+    const basePath = "https://app.vouchsafe.id/api/v1"
 
     this.config = new Configuration({
       basePath,
@@ -70,13 +67,13 @@ export class VouchsafeClient {
       return this.token
     }
 
-    const authBody: AuthenticateRequestBody = {
+    const authBody: AuthenticateInput = {
       client_id: this.options.client_id,
       client_secret: this.options.client_secret,
     }
 
     const response = await this.authenticationApi.authenticate({
-      authenticateRequestBody: authBody,
+      authenticateInput: authBody,
     })
 
     this.token = response.access_token
@@ -85,12 +82,21 @@ export class VouchsafeClient {
     return this.token
   }
 
-  // Wrap raw fetch response errors and provide something cleaner
-  private withErrorHandling = async <T>(promise: Promise<T>): Promise<T> => {
+  // Wrap raw fetch response errors and provide something cleaner, and re-auth on 401 errors
+  private withErrorHandling = async <T>(fn: () => Promise<T>): Promise<T> => {
     try {
-      return await promise
+      return await fn()
     } catch (err: any) {
       if (err.name === "ResponseError" && err.response instanceof Response) {
+        if (err.response.status === 401) {
+          // Force a token refresh and retry once
+          this.token = undefined
+          this.tokenExpiry = undefined
+          await this.getAccessToken()
+
+          return fn()
+        }
+
         const body = await err.response.json().catch(() => ({}))
         const message = body?.message ?? err.response.statusText
         throw new VouchsafeApiError(err.response.status, body, message)
@@ -107,25 +113,27 @@ export class VouchsafeClient {
    */
 
   async getVerification({ id }: { id: string }) {
-    return this.withErrorHandling(this.verificationsApi.getVerification({ id }))
+    return this.withErrorHandling(() =>
+      this.verificationsApi.getVerification({ id })
+    )
   }
 
   async listVerifications({ status }: { status?: Status } = {}) {
-    return this.withErrorHandling(
+    return this.withErrorHandling(() =>
       this.verificationsApi.listVerifications({ status })
     )
   }
 
-  async requestVerification(input: RequestVerificationRequestBody) {
-    return this.withErrorHandling(
+  async requestVerification(input: RequestVerificationInput) {
+    return this.withErrorHandling(() =>
       this.verificationsApi.requestVerification({
-        requestVerificationRequestBody: input,
+        requestVerificationInput: input,
       })
     )
   }
 
   async performSmartLookup(input: SmartLookupInput) {
-    return this.withErrorHandling(
+    return this.withErrorHandling(() =>
       this.smartLookupsApi.performSmartLookup({
         smartLookupInput: input,
       })
@@ -133,7 +141,7 @@ export class VouchsafeClient {
   }
 
   async searchPostcode({ postcode }: { postcode: string }) {
-    return this.withErrorHandling(
+    return this.withErrorHandling(() =>
       this.smartLookupsApi.searchPostcode({ postcode })
     )
   }
