@@ -4,7 +4,7 @@ apis/VerificationsApi.ts
 apis/index.ts
 index.ts
 models/ApiErrorResponse.ts
-models/AuthenticateRequestBody.ts
+models/AuthenticateInput.ts
 models/AuthenticateResponse.ts
 models/CheckResult.ts
 models/CheckState.ts
@@ -14,7 +14,7 @@ models/PostcodeResponse.ts
 models/Reason.ts
 models/RecordAddressVerificationChecksCheckResult.ts
 models/Report.ts
-models/RequestVerificationRequestBody.ts
+models/RequestVerificationInput.ts
 models/RequestVerificationResponse.ts
 models/SmartLookupInput.ts
 models/Status.ts

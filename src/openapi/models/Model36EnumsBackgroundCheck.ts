@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * Vouchsafe API docs
- * Vouchsafe offers a REST API to conduct operations programmatically.  You can request and manage verifications, as well as perform smart lookups.  To use the API, you need a client ID and secret from the Vouchsafe dashboard. [Sign up here](https://app.vouchsafe.id/) if you haven\'t already.  We also have a [video guide](https://www.youtube.com/playlist?list=PLx6V6SSTMuF_ZNWBPnysvwmdIwboLViE8) showing the basics.
+ * Vouchsafe offers a REST API to conduct operations programmatically.  You can request and manage verifications, as well as perform smart lookups.  To use the API, you need a client ID and secret from the Vouchsafe dashboard. [Sign up here](https://app.vouchsafe.id/) if you haven\'t already.  We also have a [video guide](https://www.youtube.com/playlist?list=PLx6V6SSTMuF_ZNWBPnysvwmdIwboLViE8) showing the basics, as well as [SDKs and libraries](https://help.vouchsafe.id/en/articles/12026847-vouchsafe-sdks-and-libraries) for popular languages.
  *
  * The version of the OpenAPI document: 0.1.0
  * Contact: help@vouchsafe.id

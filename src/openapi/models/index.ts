@@ -1,7 +1,7 @@
 /* tslint:disable */
 /* eslint-disable */
 export * from './ApiErrorResponse';
-export * from './AuthenticateRequestBody';
+export * from './AuthenticateInput';
 export * from './AuthenticateResponse';
 export * from './CheckResult';
 export * from './CheckState';
@@ -11,7 +11,7 @@ export * from './PostcodeResponse';
 export * from './Reason';
 export * from './RecordAddressVerificationChecksCheckResult';
 export * from './Report';
-export * from './RequestVerificationRequestBody';
+export * from './RequestVerificationInput';
 export * from './RequestVerificationResponse';
 export * from './SmartLookupInput';
 export * from './Status';

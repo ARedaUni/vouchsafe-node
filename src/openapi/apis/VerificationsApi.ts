@@ -2,7 +2,7 @@
 /* eslint-disable */
 /**
  * Vouchsafe API docs
- * Vouchsafe offers a REST API to conduct operations programmatically.  You can request and manage verifications, as well as perform smart lookups.  To use the API, you need a client ID and secret from the Vouchsafe dashboard. [Sign up here](https://app.vouchsafe.id/) if you haven\'t already.  We also have a [video guide](https://www.youtube.com/playlist?list=PLx6V6SSTMuF_ZNWBPnysvwmdIwboLViE8) showing the basics.
+ * Vouchsafe offers a REST API to conduct operations programmatically.  You can request and manage verifications, as well as perform smart lookups.  To use the API, you need a client ID and secret from the Vouchsafe dashboard. [Sign up here](https://app.vouchsafe.id/) if you haven\'t already.  We also have a [video guide](https://www.youtube.com/playlist?list=PLx6V6SSTMuF_ZNWBPnysvwmdIwboLViE8) showing the basics, as well as [SDKs and libraries](https://help.vouchsafe.id/en/articles/12026847-vouchsafe-sdks-and-libraries) for popular languages.
  *
  * The version of the OpenAPI document: 0.1.0
  * Contact: help@vouchsafe.id
@@ -16,7 +16,7 @@
 import * as runtime from '../runtime';
 import type {
   ApiErrorResponse,
-  RequestVerificationRequestBody,
+  RequestVerificationInput,
   RequestVerificationResponse,
   Status,
   Verification,
@@ -24,8 +24,8 @@ import type {
 import {
     ApiErrorResponseFromJSON,
     ApiErrorResponseToJSON,
-    RequestVerificationRequestBodyFromJSON,
-    RequestVerificationRequestBodyToJSON,
+    RequestVerificationInputFromJSON,
+    RequestVerificationInputToJSON,
     RequestVerificationResponseFromJSON,
     RequestVerificationResponseToJSON,
     StatusFromJSON,
@@ -43,7 +43,7 @@ export interface ListVerificationsRequest {
 }
 
 export interface RequestVerificationRequest {
-    requestVerificationRequestBody: RequestVerificationRequestBody;
+    requestVerificationInput: RequestVerificationInput;
 }
 
 /**
@@ -141,10 +141,10 @@ export class VerificationsApi extends runtime.BaseAPI {
      * Request a new verification.  Provide the user\'s email and the ID of one of your verification flows to send them through.  Vouchsafe will respond with:  - a URL to redirect to the user to - a unique ID for you to track the verification  If you have enabled \"On request creation\" emails in your flow, this also sends them an email.  You can optionally provide more information/claims about the user, like their name, date of birth and address. Any that are provided will be checked against evidence the user gives, and mismatches will be flagged.  > This endpoint supports sandbox mode. [See how sandbox mode works](https://help.vouchsafe.id/en/articles/11979598-how-does-sandbox-mode-work).
      */
     async requestVerificationRaw(requestParameters: RequestVerificationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<RequestVerificationResponse>> {
-        if (requestParameters['requestVerificationRequestBody'] == null) {
+        if (requestParameters['requestVerificationInput'] == null) {
             throw new runtime.RequiredError(
-                'requestVerificationRequestBody',
-                'Required parameter "requestVerificationRequestBody" was null or undefined when calling requestVerification().'
+                'requestVerificationInput',
+                'Required parameter "requestVerificationInput" was null or undefined when calling requestVerification().'
             );
         }
 
@@ -170,7 +170,7 @@ export class VerificationsApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: RequestVerificationRequestBodyToJSON(requestParameters['requestVerificationRequestBody']),
+            body: RequestVerificationInputToJSON(requestParameters['requestVerificationInput']),
         }, initOverrides);
 
         return new runtime.JSONApiResponse(response, (jsonValue) => RequestVerificationResponseFromJSON(jsonValue));
