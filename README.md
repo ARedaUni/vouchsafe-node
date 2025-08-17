@@ -53,12 +53,26 @@ const res = await client.getVerification({
 
 ### Sandbox mode
 
-1. Add `sandbox: true` when instantiating the client
-2. Use a sandbox client secret.
+Use a sandbox rather than a live client secret to activate [sandbox mode](https://help.vouchsafe.id/en/articles/11979598-how-does-sandbox-mode-work) on methods that support it.
 
-### Expiring access tokens
+### Re-authentication
 
-The client will automatically store your access token and insert it into every request, and fetch a new one upon expiry.
+The client will automatically cache your access token and insert it into every request, and fetch a new one upon expiry.
+
+If a request fails with a 401 Unauthorised error, it will fetch a new access token and retry once before throwing an error.
+
+#### Multi-instance use
+
+For best performance, you should instantiate the client once and share it across your app as a [singleton](https://www.patterns.dev/vanilla/singleton-pattern/).
+
+Each time a new access token is requested using the same client credentials, it invalidates the old one.
+
+Instantiating multiple clients can lead to:
+
+- over-writing each other's tokens
+- unnecessary retries and re-authentications.
+
+For high-concurrency use cases, you should store the access token in a shared key-value store instead.
 
 ### Handling errors
 
