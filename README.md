@@ -51,6 +51,12 @@ const res = await client.getVerification({
 })
 ```
 
+### List verification flows
+
+```ts
+const res = await client.listFlows()
+```
+
 ### Sandbox mode
 
 Use a sandbox rather than a live client secret to activate [sandbox mode](https://help.vouchsafe.id/en/articles/11979598-how-does-sandbox-mode-work) on methods that support it.

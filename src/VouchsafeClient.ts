@@ -2,6 +2,7 @@ import { Configuration } from "./openapi"
 import { AuthenticationApi } from "./openapi/apis/AuthenticationApi"
 import { VerificationsApi } from "./openapi/apis/VerificationsApi"
 import { SmartLookupsApi } from "./openapi/apis/SmartLookupsApi"
+import { FlowsApi } from "./openapi/apis/FlowsApi"
 import {
   AuthenticateInput,
   RequestVerificationInput,
@@ -34,6 +35,7 @@ export class VouchsafeClient {
   private authenticationApi: AuthenticationApi
   private verificationsApi: VerificationsApi
   private smartLookupsApi: SmartLookupsApi
+  private flowsApi: FlowsApi
 
   constructor(private options: VouchsafeClientOptions) {
     const basePath = "https://app.vouchsafe.id/api/v1"
@@ -46,6 +48,7 @@ export class VouchsafeClient {
     this.authenticationApi = new AuthenticationApi(this.config)
     this.verificationsApi = new VerificationsApi(this.config)
     this.smartLookupsApi = new SmartLookupsApi(this.config)
+    this.flowsApi = new FlowsApi(this.config)
   }
 
   /**
@@ -143,6 +146,18 @@ export class VouchsafeClient {
   async searchPostcode({ postcode }: { postcode: string }) {
     return this.withErrorHandling(() =>
       this.smartLookupsApi.searchPostcode({ postcode })
+    )
+  }
+
+  async listFlows() {
+    return this.withErrorHandling(() =>
+      this.withErrorHandling(() => this.flowsApi.listFlows())
+    )
+  }
+
+  async getFlow({ id }: { id: string }) {
+    return this.withErrorHandling(() =>
+      this.withErrorHandling(() => this.flowsApi.getFlow({ id }))
     )
   }
 

@@ -1,4 +1,5 @@
 apis/AuthenticationApi.ts
+apis/FlowsApi.ts
 apis/SmartLookupsApi.ts
 apis/VerificationsApi.ts
 apis/index.ts
@@ -8,6 +9,7 @@ models/AuthenticateInput.ts
 models/AuthenticateResponse.ts
 models/CheckResult.ts
 models/CheckState.ts
+models/Flow.ts
 models/GetSmartLookupResponse.ts
 models/Model36EnumsBackgroundCheck.ts
 models/PostcodeResponse.ts

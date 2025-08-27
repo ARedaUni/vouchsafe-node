@@ -5,6 +5,7 @@ export * from './AuthenticateInput';
 export * from './AuthenticateResponse';
 export * from './CheckResult';
 export * from './CheckState';
+export * from './Flow';
 export * from './GetSmartLookupResponse';
 export * from './Model36EnumsBackgroundCheck';
 export * from './PostcodeResponse';
