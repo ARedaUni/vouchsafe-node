@@ -1,6 +1,7 @@
 apis/AuthenticationApi.ts
 apis/FlowsApi.ts
 apis/SmartLookupsApi.ts
+apis/TeamApi.ts
 apis/VerificationsApi.ts
 apis/index.ts
 index.ts
@@ -9,9 +10,14 @@ models/AuthenticateInput.ts
 models/AuthenticateResponse.ts
 models/CheckResult.ts
 models/CheckState.ts
+models/CreateTeamInput.ts
+models/CreateTeamResponse.ts
+models/CreateTeamResponseCredentials.ts
 models/Flow.ts
+models/FlowTemplate.ts
 models/GetSmartLookupResponse.ts
 models/Model36EnumsBackgroundCheck.ts
+models/Model36EnumsEnvironment.ts
 models/PostcodeResponse.ts
 models/Reason.ts
 models/RecordAddressVerificationChecksCheckResult.ts
@@ -20,6 +26,7 @@ models/RequestVerificationInput.ts
 models/RequestVerificationResponse.ts
 models/SmartLookupInput.ts
 models/Status.ts
+models/Team.ts
 models/Verification.ts
 models/index.ts
 runtime.ts

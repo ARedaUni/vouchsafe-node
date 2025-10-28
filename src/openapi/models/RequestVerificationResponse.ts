@@ -32,6 +32,12 @@ export interface RequestVerificationResponse {
      */
     id: string;
     /**
+     * The flow it belongs to
+     * @type {string}
+     * @memberof RequestVerificationResponse
+     */
+    workflow_id?: string;
+    /**
      * When the user will stop getting reminders
      * @type {string}
      * @memberof RequestVerificationResponse
@@ -61,6 +67,7 @@ export function RequestVerificationResponseFromJSONTyped(json: any, ignoreDiscri
         
         'url': json['url'],
         'id': json['id'],
+        'workflow_id': json['workflow_id'] == null ? undefined : json['workflow_id'],
         'expires_at': json['expires_at'],
     };
 }
@@ -78,6 +85,7 @@ export function RequestVerificationResponseToJSONTyped(value?: RequestVerificati
         
         'url': value['url'],
         'id': value['id'],
+        'workflow_id': value['workflow_id'],
         'expires_at': value['expires_at'],
     };
 }
