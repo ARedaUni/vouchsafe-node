@@ -76,7 +76,7 @@ jobs:
         run: |
           echo "✅ SDK updated and published successfully!" >> $GITHUB_STEP_SUMMARY
           echo "📦 New version: ${{ env.NEW_VERSION }}" >> $GITHUB_STEP_SUMMARY
-          echo "🚀 Published to npm: @jimmy139/vouchsafe-node-fake@${{ env.NEW_VERSION }}" >> $GITHUB_STEP_SUMMARY
+          echo "🚀 Published to npm: @vouchsafe/node@${{ env.NEW_VERSION }}" >> $GITHUB_STEP_SUMMARY
 
       - name: No changes summary
         if: steps.changes.outputs.changed == 'false'
