@@ -10,7 +10,6 @@ import {
 import { RequestBuilder } from '../../../../../../http/transport/request-builder';
 import { SerializationStyle } from '../../../../../../http/serialization/base-serializer';
 import { VouchsafeApiError } from '../../../../../../http/errors/throwable-error';
-import { requireCredential, resolveAuthHeaders } from '../../../../../../http/auth';
 import { HttpResponsePromise, WithRawResponse } from '../../../../../../http/response-promise';
 import { Supplier, resolveHeaders } from '../../../../../../http/utils/supplier';
 import { VouchsafeApiEnvironment } from '../../../../../../http/environment';
@@ -90,17 +89,6 @@ Providing a `location` is strongly recommended: it significantly improves search
       .setMethod('POST')
       .setPath('/adverse-media')
       .setRequestSchema(adverseMediaInputRequest)
-      .addAuthHeaders(
-        await resolveAuthHeaders(
-          resolvedConfig,
-          async () =>
-            requireCredential(
-              await Supplier.get(resolvedConfig?.token),
-              "Please provide 'token' when initializing the client",
-            ),
-          'Bearer',
-        ),
-      )
       .setScopes([])
       .setTokenManager(this.tokenManager)
       .setRequestContentType(ContentType.Json)

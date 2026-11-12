@@ -10,7 +10,6 @@ import {
 import { RequestBuilder } from '../../../../../../http/transport/request-builder';
 import { SerializationStyle } from '../../../../../../http/serialization/base-serializer';
 import { VouchsafeApiError } from '../../../../../../http/errors/throwable-error';
-import { requireCredential, resolveAuthHeaders } from '../../../../../../http/auth';
 import { HttpResponsePromise, WithRawResponse } from '../../../../../../http/response-promise';
 import { Supplier, resolveHeaders } from '../../../../../../http/utils/supplier';
 import { VouchsafeApiEnvironment } from '../../../../../../http/environment';
@@ -94,17 +93,6 @@ Referee-specific verification flows cannot be started independently, so are not 
       .setMethod('GET')
       .setPath('/flows')
       .setRequestSchema(core.cast.identity<unknown>())
-      .addAuthHeaders(
-        await resolveAuthHeaders(
-          resolvedConfig,
-          async () =>
-            requireCredential(
-              await Supplier.get(resolvedConfig?.token),
-              "Please provide 'token' when initializing the client",
-            ),
-          'Bearer',
-        ),
-      )
       .setScopes([])
       .setTokenManager(this.tokenManager)
       .setRequestContentType(ContentType.Json)
@@ -160,17 +148,6 @@ Use an ID from one of these flows to request verifications with the  [`POST /ver
       .setMethod('GET')
       .setPath('/flows/{id}')
       .setRequestSchema(core.cast.identity<unknown>())
-      .addAuthHeaders(
-        await resolveAuthHeaders(
-          resolvedConfig,
-          async () =>
-            requireCredential(
-              await Supplier.get(resolvedConfig?.token),
-              "Please provide 'token' when initializing the client",
-            ),
-          'Bearer',
-        ),
-      )
       .setScopes([])
       .setTokenManager(this.tokenManager)
       .setRequestContentType(ContentType.Json)

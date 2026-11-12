@@ -9,7 +9,6 @@ import {
 import { OAuthTokenManager } from './http/oauth/token-manager';
 import { Supplier } from './http/utils/supplier';
 import { makePassthroughRequest } from './http/utils/passthrough-request';
-import { resolveAuthHeaders } from './http/auth';
 import { V1Client } from './api/resources/v1/client/Client';
 import { V2Client } from './api/resources/v2/client/Client';
 
@@ -49,11 +48,6 @@ export class VouchsafeApiClient {
     init?: RequestInit,
     requestOptions?: core.PassthroughRequest.RequestOptions,
   ): Promise<Response> {
-    const resolvedAuthHeaders = await resolveAuthHeaders(
-      this._options,
-      async () => await Supplier.get(this._options.token),
-      'Bearer',
-    );
     return makePassthroughRequest(
       input,
       init,
@@ -63,11 +57,6 @@ export class VouchsafeApiClient {
           ((await Supplier.get(this._options.environment)) ?? VouchsafeApiEnvironment.Production)
             .v1,
         headers: this._options.headers,
-        authHeaders: {
-          ...resolvedAuthHeaders,
-        },
-        environmentUrls:
-          (await Supplier.get(this._options.environment)) ?? VouchsafeApiEnvironment.Production,
         timeoutInSeconds: this._options.timeoutInSeconds,
         maxRetries: this._options.maxRetries,
         fetch: this._options.fetch,

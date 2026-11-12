@@ -36,7 +36,7 @@ Instantiate and use the client with the following:
 ```typescript
 import { VouchsafeApiClient } from '@vouchsafe/node';
 
-const client = new VouchsafeApiClient({ token: 'YOUR_TOKEN' });
+const client = new VouchsafeApiClient({ clientId: 'CLIENT_ID', clientSecret: 'CLIENT_SECRET' });
 await client.v1.verify.evisa({
   payload: {
     reason: 'Education or training',

@@ -10,7 +10,6 @@ import {
 import { RequestBuilder } from '../../../../../../http/transport/request-builder';
 import { SerializationStyle } from '../../../../../../http/serialization/base-serializer';
 import { VouchsafeApiError } from '../../../../../../http/errors/throwable-error';
-import { requireCredential, resolveAuthHeaders } from '../../../../../../http/auth';
 import { HttpResponsePromise, WithRawResponse } from '../../../../../../http/response-promise';
 import { Supplier, resolveHeaders } from '../../../../../../http/utils/supplier';
 import { VouchsafeApiEnvironment } from '../../../../../../http/environment';
@@ -92,17 +91,6 @@ Helpful for testing, especially when managing multiple client IDs and secrets.
       .setMethod('GET')
       .setPath('/team')
       .setRequestSchema(core.cast.identity<unknown>())
-      .addAuthHeaders(
-        await resolveAuthHeaders(
-          resolvedConfig,
-          async () =>
-            requireCredential(
-              await Supplier.get(resolvedConfig?.token),
-              "Please provide 'token' when initializing the client",
-            ),
-          'Bearer',
-        ),
-      )
       .setScopes([])
       .setTokenManager(this.tokenManager)
       .setRequestContentType(ContentType.Json)

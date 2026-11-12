@@ -3,7 +3,6 @@ import { Request } from './transport/request';
 import { Supplier } from './utils/supplier';
 import { ConsoleLogger, ILogger, LogConfig, LogLevel, Logger } from './utils/logger';
 import { RawResponse } from './utils/fetcher';
-import { AuthProvider, resolveBearerAuthProvider } from './auth';
 
 /**
  * Standard HTTP methods supported by the SDK.
@@ -34,11 +33,10 @@ export interface BaseConfig {
   fetch?: (url: any, init: any) => Promise<Response>;
   stream?: { reconnectionEnabled?: boolean; maxReconnectionAttempts?: number };
   abortSignal?: AbortSignal;
-  auth?: AuthOption;
+  auth?: boolean;
   baseUrl?: Supplier<string>;
   timeoutInSeconds?: number;
   environment?: Supplier<VouchsafeApiEnvironment | VouchsafeApiEnvironmentUrls>;
-  token?: Supplier<string>;
   oAuthBaseUrl?: string;
 }
 
@@ -54,13 +52,7 @@ interface TokenAuthConfig extends BaseConfig {
   accessToken: string;
 }
 
-interface NonOAuthConfig extends BaseConfig {
-  clientId?: never;
-  clientSecret?: never;
-  accessToken?: never;
-}
-
-export type BaseClientOptions = ClientCredentialAuthConfig | TokenAuthConfig | NonOAuthConfig;
+export type BaseClientOptions = ClientCredentialAuthConfig | TokenAuthConfig;
 
 /**
  * Per-request configuration overrides — a narrower, request-scoped counterpart to the
@@ -96,7 +88,6 @@ export declare namespace core {
  */
 export type NormalizedClientOptions<T extends BaseClientOptions = BaseClientOptions> = T & {
   logging: Logger;
-  authProvider?: AuthProvider;
 };
 
 export function normalizeClientOptions<T extends BaseClientOptions = BaseClientOptions>(
@@ -106,29 +97,6 @@ export function normalizeClientOptions<T extends BaseClientOptions = BaseClientO
     ...options,
     logging: Logger.from(options.logging),
   } as NormalizedClientOptions<T>;
-}
-
-export type AuthOption =
-  | false
-  | AuthProvider['getAuthRequest']
-  | AuthProvider
-  | { token?: Supplier<string> };
-
-export type NormalizedClientOptionsWithAuth<T extends BaseClientOptions = BaseClientOptions> =
-  NormalizedClientOptions<T> & { authProvider: AuthProvider };
-
-export function normalizeClientOptionsWithAuth<T extends BaseClientOptions = BaseClientOptions>(
-  options: T,
-): NormalizedClientOptionsWithAuth<T> {
-  const normalized = normalizeClientOptions(options);
-  return {
-    ...normalized,
-    authProvider: resolveBearerAuthProvider(
-      options,
-      async () => await Supplier.get(options.token),
-      'Bearer',
-    ),
-  };
 }
 
 type _LogConfig = LogConfig;

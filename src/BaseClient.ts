@@ -1,7 +1,2 @@
-export type {
-  BaseClientOptions,
-  BaseRequestOptions,
-  NormalizedClientOptions,
-  NormalizedClientOptionsWithAuth,
-} from './http/types';
-export { normalizeClientOptions, normalizeClientOptionsWithAuth } from './http/types';
+export type { BaseClientOptions, BaseRequestOptions, NormalizedClientOptions } from './http/types';
+export { normalizeClientOptions } from './http/types';

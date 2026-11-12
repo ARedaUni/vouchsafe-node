@@ -10,7 +10,6 @@ import {
 import { RequestBuilder } from '../../../../../../http/transport/request-builder';
 import { SerializationStyle } from '../../../../../../http/serialization/base-serializer';
 import { VouchsafeApiError } from '../../../../../../http/errors/throwable-error';
-import { requireCredential, resolveAuthHeaders } from '../../../../../../http/auth';
 import { HttpResponsePromise, WithRawResponse } from '../../../../../../http/response-promise';
 import { Supplier, resolveHeaders } from '../../../../../../http/utils/supplier';
 import { VouchsafeApiEnvironment } from '../../../../../../http/environment';
@@ -133,17 +132,6 @@ This can be a long list, so filtering by status is recommended.
       .setMethod('GET')
       .setPath('/verifications')
       .setRequestSchema(core.cast.identity<unknown>())
-      .addAuthHeaders(
-        await resolveAuthHeaders(
-          resolvedConfig,
-          async () =>
-            requireCredential(
-              await Supplier.get(resolvedConfig?.token),
-              "Please provide 'token' when initializing the client",
-            ),
-          'Bearer',
-        ),
-      )
       .setScopes([])
       .setTokenManager(this.tokenManager)
       .setRequestContentType(ContentType.Json)
@@ -226,17 +214,6 @@ You can override the expiry for a specific verification using the `expires_at` f
       .setMethod('POST')
       .setPath('/verifications')
       .setRequestSchema(requestVerificationInputRequest)
-      .addAuthHeaders(
-        await resolveAuthHeaders(
-          resolvedConfig,
-          async () =>
-            requireCredential(
-              await Supplier.get(resolvedConfig?.token),
-              "Please provide 'token' when initializing the client",
-            ),
-          'Bearer',
-        ),
-      )
       .setScopes([])
       .setTokenManager(this.tokenManager)
       .setRequestContentType(ContentType.Json)
@@ -325,17 +302,6 @@ collected that data.
       .setMethod('GET')
       .setPath('/verifications/{id}')
       .setRequestSchema(core.cast.identity<unknown>())
-      .addAuthHeaders(
-        await resolveAuthHeaders(
-          resolvedConfig,
-          async () =>
-            requireCredential(
-              await Supplier.get(resolvedConfig?.token),
-              "Please provide 'token' when initializing the client",
-            ),
-          'Bearer',
-        ),
-      )
       .setScopes([])
       .setTokenManager(this.tokenManager)
       .setRequestContentType(ContentType.Json)
@@ -398,17 +364,6 @@ In sandbox mode, you can call this endpoint to see the response for each sandbox
       .setMethod('POST')
       .setPath('/verifications/{id}/cancel')
       .setRequestSchema(core.cast.identity<unknown>())
-      .addAuthHeaders(
-        await resolveAuthHeaders(
-          resolvedConfig,
-          async () =>
-            requireCredential(
-              await Supplier.get(resolvedConfig?.token),
-              "Please provide 'token' when initializing the client",
-            ),
-          'Bearer',
-        ),
-      )
       .setScopes([])
       .setTokenManager(this.tokenManager)
       .setRequestContentType(ContentType.Json)

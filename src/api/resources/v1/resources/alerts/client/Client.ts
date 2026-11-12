@@ -10,7 +10,6 @@ import {
 import { RequestBuilder } from '../../../../../../http/transport/request-builder';
 import { SerializationStyle } from '../../../../../../http/serialization/base-serializer';
 import { VouchsafeApiError } from '../../../../../../http/errors/throwable-error';
-import { requireCredential, resolveAuthHeaders } from '../../../../../../http/auth';
 import { HttpResponsePromise, WithRawResponse } from '../../../../../../http/response-promise';
 import { Supplier, resolveHeaders } from '../../../../../../http/utils/supplier';
 import { VouchsafeApiEnvironment } from '../../../../../../http/environment';
@@ -140,17 +139,6 @@ Use cursor-based pagination to iterate through results.
       .setMethod('GET')
       .setPath('/alerts/accounts')
       .setRequestSchema(core.cast.identity<unknown>())
-      .addAuthHeaders(
-        await resolveAuthHeaders(
-          resolvedConfig,
-          async () =>
-            requireCredential(
-              await Supplier.get(resolvedConfig?.token),
-              "Please provide 'token' when initializing the client",
-            ),
-          'Bearer',
-        ),
-      )
       .setScopes([])
       .setTokenManager(this.tokenManager)
       .setRequestContentType(ContentType.Json)
@@ -217,17 +205,6 @@ Each alert has a `source` field that determines its shape:
       .setMethod('GET')
       .setPath('/alerts/accounts/{id}')
       .setRequestSchema(core.cast.identity<unknown>())
-      .addAuthHeaders(
-        await resolveAuthHeaders(
-          resolvedConfig,
-          async () =>
-            requireCredential(
-              await Supplier.get(resolvedConfig?.token),
-              "Please provide 'token' when initializing the client",
-            ),
-          'Bearer',
-        ),
-      )
       .setScopes([])
       .setTokenManager(this.tokenManager)
       .setRequestContentType(ContentType.Json)
@@ -288,17 +265,6 @@ Enable or disable AML/sanctions screening for an existing account.
       .setMethod('PATCH')
       .setPath('/alerts/accounts/{id}')
       .setRequestSchema(toggleAlertsInputRequest)
-      .addAuthHeaders(
-        await resolveAuthHeaders(
-          resolvedConfig,
-          async () =>
-            requireCredential(
-              await Supplier.get(resolvedConfig?.token),
-              "Please provide 'token' when initializing the client",
-            ),
-          'Bearer',
-        ),
-      )
       .setScopes([])
       .setTokenManager(this.tokenManager)
       .setRequestContentType(ContentType.Json)
@@ -366,17 +332,6 @@ on an alert in the response.
       .setMethod('PATCH')
       .setPath('/alerts/{alertId}')
       .setRequestSchema(core.cast.identity<unknown>())
-      .addAuthHeaders(
-        await resolveAuthHeaders(
-          resolvedConfig,
-          async () =>
-            requireCredential(
-              await Supplier.get(resolvedConfig?.token),
-              "Please provide 'token' when initializing the client",
-            ),
-          'Bearer',
-        ),
-      )
       .setScopes([])
       .setTokenManager(this.tokenManager)
       .setRequestContentType(ContentType.Json)

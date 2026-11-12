@@ -1,7 +1,7 @@
 import { VouchsafeApiClient } from '@vouchsafe/node';
 
 (async () => {
-  const client = new VouchsafeApiClient({ token: 'YOUR_TOKEN' });
+  const client = new VouchsafeApiClient({ clientId: 'CLIENT_ID', clientSecret: 'CLIENT_SECRET' });
   await client.v1.verifications.list({
     status: 'InProgress',
   });

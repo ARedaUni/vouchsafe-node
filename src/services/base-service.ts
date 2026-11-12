@@ -106,10 +106,6 @@ export class BaseService {
     this._options.environment = environment;
   }
 
-  protected set token(token: Supplier<string>) {
-    this._options.token = token;
-  }
-
   protected set clientId(clientId: string) {
     this._options.clientId = clientId;
   }
