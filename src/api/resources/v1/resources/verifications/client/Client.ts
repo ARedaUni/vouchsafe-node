@@ -178,7 +178,7 @@ You can override the expiry for a specific verification using the `expires_at` f
 > This endpoint supports sandbox mode. [See how sandbox mode works](https://docs.vouchsafe.id/sandbox).
  * @param {VouchsafeApi.v1.RequestVerificationInput} request
  * @param {VerificationsClient.RequestOptions} [requestOptions] - Request-specific configuration.
- * @returns {HttpResponsePromise<VouchsafeApi.v1.RequestVerificationResponse>} - An in progress verification already exists and is returned
+ * @returns {HttpResponsePromise<VouchsafeApi.v1.RequestVerificationResponse>} - Verification created
  *
  * @throws {@link VouchsafeApi.BadRequestError}
  * @throws {@link VouchsafeApi.UnauthorizedError}
@@ -217,11 +217,6 @@ You can override the expiry for a specific verification using the `expires_at` f
       .setScopes([])
       .setTokenManager(this.tokenManager)
       .setRequestContentType(ContentType.Json)
-      .addResponse({
-        schema: requestVerificationResponseResponse,
-        contentType: ContentType.Json,
-        status: 200,
-      })
       .addResponse({
         schema: requestVerificationResponseResponse,
         contentType: ContentType.Json,
