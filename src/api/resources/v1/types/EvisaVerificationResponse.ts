@@ -31,13 +31,13 @@ export type EvisaVerificationResponse =
 
 export namespace EvisaVerificationResponse {
   export interface ImmigrationStatus extends _ImmigrationStatusVerificationResponse {
-    evidenceType: 'immigration_status';
+    evidence_type: 'immigration_status';
   }
   export interface RightToWork extends _RightToWorkVerificationResponse {
-    evidenceType: 'right_to_work';
+    evidence_type: 'right_to_work';
   }
   export interface RightToRent extends _RightToRentVerificationResponse {
-    evidenceType: 'right_to_rent';
+    evidence_type: 'right_to_rent';
   }
 }
 

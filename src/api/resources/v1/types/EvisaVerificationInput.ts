@@ -34,13 +34,13 @@ export type EvisaVerificationInput =
 
 export namespace EvisaVerificationInput {
   export interface ImmigrationStatus extends _ImmigrationStatusInput {
-    subType: 'ImmigrationStatus';
+    sub_type: 'ImmigrationStatus';
   }
   export interface RightToWork extends _RightToWorkInput {
-    subType: 'RightToWork';
+    sub_type: 'RightToWork';
   }
   export interface RightToRent extends _RightToRentInput {
-    subType: 'RightToRent';
+    sub_type: 'RightToRent';
   }
 }
 

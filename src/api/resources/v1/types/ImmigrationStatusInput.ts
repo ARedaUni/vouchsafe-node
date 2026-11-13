@@ -1,5 +1,9 @@
 import * as core from '../../../../core';
 import {
+  ImmigrationStatusInputSubType,
+  immigrationStatusInputSubType,
+} from './ImmigrationStatusInputSubType';
+import {
   ImmigrationStatusInputPayload,
   immigrationStatusInputPayload,
   immigrationStatusInputPayloadRequest,
@@ -10,10 +14,14 @@ import {
  * Request payload for ImmigrationStatus verification
  */
 export interface ImmigrationStatusInput {
+  /** The type of eVisa verification to perform */
+  sub_type: 'ImmigrationStatus';
   payload: ImmigrationStatusInputPayload;
 }
 
 export namespace ImmigrationStatusInput {
+  export type SubType = ImmigrationStatusInputSubType;
+  export const SubType = ImmigrationStatusInputSubType;
   export interface Payload {
     reason: ImmigrationStatusInputPayload['reason'];
     job_title: ImmigrationStatusInputPayload['job_title'];
@@ -38,7 +46,7 @@ export const immigrationStatusInputResponse = core.cast.object(
     if (raw === null || raw === undefined) {
       return raw;
     }
-    const __declaredKeys = new Set<string>(['payload']);
+    const __declaredKeys = new Set<string>(['sub_type', 'payload']);
     const __extras: { [key: string]: unknown } = {};
     for (const __key of globalThis.Object.keys(raw as object)) {
       if (!__declaredKeys.has(__key)) {
@@ -47,13 +55,14 @@ export const immigrationStatusInputResponse = core.cast.object(
     }
     return {
       ...__extras,
+      sub_type: raw['sub_type'],
       payload:
         raw['payload'] == null
           ? raw['payload']
           : immigrationStatusInputPayloadResponse.parse(raw['payload']),
     };
   },
-  ['payload'],
+  ['sub_type', 'payload'],
 );
 
 /**
@@ -66,11 +75,12 @@ export const immigrationStatusInputRequest = core.cast.object(
       return raw;
     }
     return {
+      sub_type: raw['sub_type'],
       payload:
         raw['payload'] == null
           ? raw['payload']
           : immigrationStatusInputPayloadRequest.parse(raw['payload']),
     };
   },
-  ['payload'],
+  ['sub_type', 'payload'],
 );

@@ -4,6 +4,10 @@ import {
   immigrationStatusVerificationResponseVerificationMethod,
 } from './ImmigrationStatusVerificationResponseVerificationMethod';
 import {
+  ImmigrationStatusVerificationResponseEvidenceType,
+  immigrationStatusVerificationResponseEvidenceType,
+} from './ImmigrationStatusVerificationResponseEvidenceType';
+import {
   ImmigrationStatusApiValidationStatus,
   immigrationStatusApiValidationStatus,
 } from './ImmigrationStatusApiValidationStatus';
@@ -28,6 +32,7 @@ import {
 
 export interface ImmigrationStatusVerificationResponse {
   verification_method: ImmigrationStatusVerificationResponseVerificationMethod;
+  evidence_type: 'immigration_status';
   outcome: ImmigrationStatusApiValidationStatus;
   /** Whether this API call is billable. `true` when the eVisa was found on GOV.UK, `false` when the share code or date of birth was invalid. */
   billable: boolean;
@@ -39,6 +44,8 @@ export interface ImmigrationStatusVerificationResponse {
 export namespace ImmigrationStatusVerificationResponse {
   export type VerificationMethod = ImmigrationStatusVerificationResponseVerificationMethod;
   export const VerificationMethod = ImmigrationStatusVerificationResponseVerificationMethod;
+  export type EvidenceType = ImmigrationStatusVerificationResponseEvidenceType;
+  export const EvidenceType = ImmigrationStatusVerificationResponseEvidenceType;
   export type ExtractedDetails = ImmigrationStatusVerificationResponseExtractedDetails;
   export type Validations = ImmigrationStatusVerificationResponseValidations;
 }
@@ -61,6 +68,7 @@ export const immigrationStatusVerificationResponseResponse = core.cast.object(
     }
     const __declaredKeys = new Set<string>([
       'verification_method',
+      'evidence_type',
       'outcome',
       'billable',
       'extracted_details',
@@ -76,6 +84,7 @@ export const immigrationStatusVerificationResponseResponse = core.cast.object(
     return {
       ...__extras,
       verification_method: raw['verification_method'],
+      evidence_type: raw['evidence_type'],
       outcome: raw['outcome'],
       billable: raw['billable'],
       extracted_details: raw['extracted_details'],
@@ -87,7 +96,15 @@ export const immigrationStatusVerificationResponseResponse = core.cast.object(
       validations: raw['validations'],
     };
   },
-  ['verification_method', 'outcome', 'billable', 'extracted_details', 'artefacts', 'validations'],
+  [
+    'verification_method',
+    'evidence_type',
+    'outcome',
+    'billable',
+    'extracted_details',
+    'artefacts',
+    'validations',
+  ],
 );
 
 /**
@@ -101,6 +118,7 @@ export const immigrationStatusVerificationResponseRequest = core.cast.object(
     }
     return {
       verification_method: raw['verification_method'],
+      evidence_type: raw['evidence_type'],
       outcome: raw['outcome'],
       billable: raw['billable'],
       extracted_details: raw['extracted_details'],
@@ -112,5 +130,13 @@ export const immigrationStatusVerificationResponseRequest = core.cast.object(
       validations: raw['validations'],
     };
   },
-  ['verification_method', 'outcome', 'billable', 'extracted_details', 'artefacts', 'validations'],
+  [
+    'verification_method',
+    'evidence_type',
+    'outcome',
+    'billable',
+    'extracted_details',
+    'artefacts',
+    'validations',
+  ],
 );

@@ -3,6 +3,10 @@ import {
   RightToRentVerificationResponseVerificationMethod,
   rightToRentVerificationResponseVerificationMethod,
 } from './RightToRentVerificationResponseVerificationMethod';
+import {
+  RightToRentVerificationResponseEvidenceType,
+  rightToRentVerificationResponseEvidenceType,
+} from './RightToRentVerificationResponseEvidenceType';
 import { ApiValidationStatus, apiValidationStatus } from './ApiValidationStatus';
 import {
   RightToRentVerificationResponseExtractedDetails,
@@ -25,6 +29,7 @@ import {
 
 export interface RightToRentVerificationResponse {
   verification_method: RightToRentVerificationResponseVerificationMethod;
+  evidence_type: 'right_to_rent';
   outcome: ApiValidationStatus;
   /** Whether this API call is billable. `true` when the eVisa was found on GOV.UK, `false` when the share code or date of birth was invalid. */
   billable: boolean;
@@ -36,6 +41,8 @@ export interface RightToRentVerificationResponse {
 export namespace RightToRentVerificationResponse {
   export type VerificationMethod = RightToRentVerificationResponseVerificationMethod;
   export const VerificationMethod = RightToRentVerificationResponseVerificationMethod;
+  export type EvidenceType = RightToRentVerificationResponseEvidenceType;
+  export const EvidenceType = RightToRentVerificationResponseEvidenceType;
   export type ExtractedDetails = RightToRentVerificationResponseExtractedDetails;
   export type Validations = RightToRentVerificationResponseValidations;
 }
@@ -58,6 +65,7 @@ export const rightToRentVerificationResponseResponse = core.cast.object(
     }
     const __declaredKeys = new Set<string>([
       'verification_method',
+      'evidence_type',
       'outcome',
       'billable',
       'extracted_details',
@@ -73,6 +81,7 @@ export const rightToRentVerificationResponseResponse = core.cast.object(
     return {
       ...__extras,
       verification_method: raw['verification_method'],
+      evidence_type: raw['evidence_type'],
       outcome: raw['outcome'],
       billable: raw['billable'],
       extracted_details: raw['extracted_details'],
@@ -84,7 +93,15 @@ export const rightToRentVerificationResponseResponse = core.cast.object(
       validations: raw['validations'],
     };
   },
-  ['verification_method', 'outcome', 'billable', 'extracted_details', 'artefacts', 'validations'],
+  [
+    'verification_method',
+    'evidence_type',
+    'outcome',
+    'billable',
+    'extracted_details',
+    'artefacts',
+    'validations',
+  ],
 );
 
 /**
@@ -98,6 +115,7 @@ export const rightToRentVerificationResponseRequest = core.cast.object(
     }
     return {
       verification_method: raw['verification_method'],
+      evidence_type: raw['evidence_type'],
       outcome: raw['outcome'],
       billable: raw['billable'],
       extracted_details: raw['extracted_details'],
@@ -109,5 +127,13 @@ export const rightToRentVerificationResponseRequest = core.cast.object(
       validations: raw['validations'],
     };
   },
-  ['verification_method', 'outcome', 'billable', 'extracted_details', 'artefacts', 'validations'],
+  [
+    'verification_method',
+    'evidence_type',
+    'outcome',
+    'billable',
+    'extracted_details',
+    'artefacts',
+    'validations',
+  ],
 );

@@ -1,4 +1,5 @@
 import * as core from '../../../../core';
+import { RightToRentInputSubType, rightToRentInputSubType } from './RightToRentInputSubType';
 import {
   RightToRentInputPayload,
   rightToRentInputPayload,
@@ -11,10 +12,14 @@ import { RightToRentInputPayloadRole } from './RightToRentInputPayloadRole';
  * Request payload for RightToRent verification
  */
 export interface RightToRentInput {
+  /** The type of eVisa verification to perform */
+  sub_type: 'RightToRent';
   payload: RightToRentInputPayload;
 }
 
 export namespace RightToRentInput {
+  export type SubType = RightToRentInputSubType;
+  export const SubType = RightToRentInputSubType;
   export interface Payload {
     role: RightToRentInputPayload['role'];
     company_name: RightToRentInputPayload['company_name'];
@@ -42,7 +47,7 @@ export const rightToRentInputResponse = core.cast.object(
     if (raw === null || raw === undefined) {
       return raw;
     }
-    const __declaredKeys = new Set<string>(['payload']);
+    const __declaredKeys = new Set<string>(['sub_type', 'payload']);
     const __extras: { [key: string]: unknown } = {};
     for (const __key of globalThis.Object.keys(raw as object)) {
       if (!__declaredKeys.has(__key)) {
@@ -51,13 +56,14 @@ export const rightToRentInputResponse = core.cast.object(
     }
     return {
       ...__extras,
+      sub_type: raw['sub_type'],
       payload:
         raw['payload'] == null
           ? raw['payload']
           : rightToRentInputPayloadResponse.parse(raw['payload']),
     };
   },
-  ['payload'],
+  ['sub_type', 'payload'],
 );
 
 /**
@@ -70,11 +76,12 @@ export const rightToRentInputRequest = core.cast.object(
       return raw;
     }
     return {
+      sub_type: raw['sub_type'],
       payload:
         raw['payload'] == null
           ? raw['payload']
           : rightToRentInputPayloadRequest.parse(raw['payload']),
     };
   },
-  ['payload'],
+  ['sub_type', 'payload'],
 );

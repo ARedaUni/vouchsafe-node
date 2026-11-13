@@ -343,6 +343,7 @@ Always check `extraction_success` before using the object:
  *
  * @example
  *     await client.v1.verify.evisa({
+ *         sub_type: "ImmigrationStatus",
  *         payload: {
  *             reason: "Education or training",
  *             job_title: "Compliance Officer",

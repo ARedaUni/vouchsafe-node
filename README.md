@@ -38,6 +38,7 @@ import { VouchsafeApiClient } from '@vouchsafe/node';
 
 const client = new VouchsafeApiClient({ clientId: 'CLIENT_ID', clientSecret: 'CLIENT_SECRET' });
 await client.v1.verify.evisa({
+  sub_type: 'ImmigrationStatus',
   payload: {
     reason: 'Education or training',
     job_title: 'Compliance Officer',

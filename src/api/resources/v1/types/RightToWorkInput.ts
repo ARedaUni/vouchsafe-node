@@ -1,4 +1,5 @@
 import * as core from '../../../../core';
+import { RightToWorkInputSubType, rightToWorkInputSubType } from './RightToWorkInputSubType';
 import {
   RightToWorkInputPayload,
   rightToWorkInputPayload,
@@ -10,10 +11,14 @@ import {
  * Request payload for RightToWork verification
  */
 export interface RightToWorkInput {
+  /** The type of eVisa verification to perform */
+  sub_type: 'RightToWork';
   payload: RightToWorkInputPayload;
 }
 
 export namespace RightToWorkInput {
+  export type SubType = RightToWorkInputSubType;
+  export const SubType = RightToWorkInputSubType;
   export interface Payload {
     company_name: RightToWorkInputPayload['company_name'];
     date_of_birth: RightToWorkInputPayload['date_of_birth'];
@@ -36,7 +41,7 @@ export const rightToWorkInputResponse = core.cast.object(
     if (raw === null || raw === undefined) {
       return raw;
     }
-    const __declaredKeys = new Set<string>(['payload']);
+    const __declaredKeys = new Set<string>(['sub_type', 'payload']);
     const __extras: { [key: string]: unknown } = {};
     for (const __key of globalThis.Object.keys(raw as object)) {
       if (!__declaredKeys.has(__key)) {
@@ -45,13 +50,14 @@ export const rightToWorkInputResponse = core.cast.object(
     }
     return {
       ...__extras,
+      sub_type: raw['sub_type'],
       payload:
         raw['payload'] == null
           ? raw['payload']
           : rightToWorkInputPayloadResponse.parse(raw['payload']),
     };
   },
-  ['payload'],
+  ['sub_type', 'payload'],
 );
 
 /**
@@ -64,11 +70,12 @@ export const rightToWorkInputRequest = core.cast.object(
       return raw;
     }
     return {
+      sub_type: raw['sub_type'],
       payload:
         raw['payload'] == null
           ? raw['payload']
           : rightToWorkInputPayloadRequest.parse(raw['payload']),
     };
   },
-  ['payload'],
+  ['sub_type', 'payload'],
 );

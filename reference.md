@@ -163,6 +163,7 @@ Verify a person's UK eVisa using their Home Office share code. This endpoint all
 
 ```typescript
 await client.v1.verify.evisa({
+  sub_type: 'ImmigrationStatus',
   payload: {
     reason: 'Education or training',
     job_title: 'Compliance Officer',
